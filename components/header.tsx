@@ -21,7 +21,7 @@ const Header = () => {
           </li>
           <li>
             <Link
-              href="report"
+              href="/report"
               className="text-white text-xl font-medium hover:text-blue-50"
             >
               Reports
