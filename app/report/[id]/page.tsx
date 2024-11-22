@@ -1,3 +1,4 @@
+import Notes from "@/components/notes";
 import { posts } from "@/data/post";
 
 export default function ReportsPage({ params }: { params: { id: string } }) {
@@ -69,6 +70,8 @@ export default function ReportsPage({ params }: { params: { id: string } }) {
           </div>
         </div>
       </div>
+
+      <Notes />
     </div>
   );
 }
