@@ -1,3 +1,4 @@
+import FormNote from "@/components/form-note";
 import Notes from "@/components/notes";
 import { posts } from "@/data/post";
 
@@ -72,6 +73,7 @@ export default function ReportsPage({ params }: { params: { id: string } }) {
       </div>
 
       <Notes />
+      <FormNote />
     </div>
   );
 }

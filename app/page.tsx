@@ -1,6 +1,9 @@
+import { getCurrentUser } from "@/lib/session";
 import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
+  const user = await getCurrentUser();
+  console.log(user);
   return (
     <>
       <main className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-sky-200 to-blue-500 text-white">

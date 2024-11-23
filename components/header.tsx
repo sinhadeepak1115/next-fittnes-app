@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LoginButton from "./loginButton";
 
 const Header = () => {
   return (
@@ -36,12 +37,13 @@ const Header = () => {
             </Link>
           </li>
         </ul>
-        <Link
-          href="/api/auth/signin"
-          className="bg-lime-300 text-blue-500  px-4 py-2 shadow rounded-md font-medium hover:text-blue-400"
-        >
-          Login
-        </Link>
+        {/* <Link */}
+        {/*   href="/api/auth/signin" */}
+        {/*   className="bg-lime-300 text-blue-500  px-4 py-2 shadow rounded-md font-medium hover:text-blue-400" */}
+        {/* > */}
+        {/*   Login */}
+        {/* </Link> */}
+        <LoginButton />
       </nav>
     </header>
   );
