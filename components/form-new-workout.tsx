@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const newFormWorkoutSchema = z.object({
   workoutName: z.string().nonempty({ message: "Please enter a workout name" }),
@@ -25,6 +26,8 @@ const newFormWorkoutSchema = z.object({
 type NewFormWorkoutType = z.infer<typeof newFormWorkoutSchema>;
 
 export function FormNewWorkout() {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -37,7 +40,9 @@ export function FormNewWorkout() {
     try {
       const response = await axios.post("api/workout", data);
       console.log(response.data);
-      console.log(response.status);
+      if (response.status === 200) {
+        return router.push("/report");
+      }
     } catch (error) {
       console.error(error);
     }

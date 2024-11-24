@@ -1,16 +1,34 @@
 import Link from "next/link";
 import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/session";
+import LoginButton from "@/components/loginButton";
 
 export default async function ReportsPage() {
   const user = await getCurrentUser();
-  console.log(user?.email);
   const posts = await prisma.workout.findMany({
     where: {
       authorEmail: user?.email,
     },
   });
-  console.log(posts);
+  if (!user) {
+    return (
+      <main className="min-h-screen bg-gradient-to-br from-sky-100 to-blue-400 py-12 px-4">
+        <div className="max-w-md mx-auto">
+          <div className="bg-white/95 backdrop-blur rounded-lg shadow-xl p-6">
+            <div className="text-center">
+              <h1 className="text-2xl font-bold text-gray-900 mb-4">
+                Welcome to Workout Reports
+              </h1>
+              <p className="text-gray-600 mb-6">
+                Please log in to view your workout details and progress
+              </p>
+              <LoginButton />
+            </div>
+          </div>
+        </div>
+      </main>
+    );
+  }
   return (
     <main className="min-h-screen bg-gradient-to-br from-sky-100 to-blue-400 py-12 px-4">
       <div className="max-w-6xl mx-auto">

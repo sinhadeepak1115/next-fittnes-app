@@ -1,6 +1,7 @@
 import FormNote from "@/components/form-note";
 import Notes from "@/components/notes";
 import prisma from "@/lib/db";
+import { getCurrentUser } from "@/lib/session";
 
 export default async function ReportsPage({
   params,
@@ -9,7 +10,8 @@ export default async function ReportsPage({
 }) {
   const user = await getCurrentUser();
   const post = await prisma.workout.findUnique({
-    where: { user?.email },
+    where: { user.email },
+
   });
   if (!post) {
     return (
