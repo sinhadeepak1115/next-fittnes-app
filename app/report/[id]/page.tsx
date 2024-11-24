@@ -1,10 +1,16 @@
 import FormNote from "@/components/form-note";
 import Notes from "@/components/notes";
-import { posts } from "@/data/post";
+import prisma from "@/lib/db";
 
-export default function ReportsPage({ params }: { params: { id: string } }) {
-  const post = posts.find((p) => p.id.toString() === params.id);
-
+export default async function ReportsPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const user = await getCurrentUser();
+  const post = await prisma.workout.findUnique({
+    where: { user?.email },
+  });
   if (!post) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -71,7 +77,6 @@ export default function ReportsPage({ params }: { params: { id: string } }) {
           </div>
         </div>
       </div>
-
       <Notes />
       <FormNote />
     </div>

@@ -1,7 +1,16 @@
 import Link from "next/link";
-import { posts } from "../../data/post";
+import prisma from "@/lib/db";
+import { getCurrentUser } from "@/lib/session";
 
-export default function ReportsPage() {
+export default async function ReportsPage() {
+  const user = await getCurrentUser();
+  console.log(user?.email);
+  const posts = await prisma.workout.findMany({
+    where: {
+      authorEmail: user?.email,
+    },
+  });
+  console.log(posts);
   return (
     <main className="min-h-screen bg-gradient-to-br from-sky-100 to-blue-400 py-12 px-4">
       <div className="max-w-6xl mx-auto">

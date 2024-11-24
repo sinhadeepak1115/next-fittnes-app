@@ -7,7 +7,7 @@ const LoginButton = () => {
   return (
     <div>
       {session.data?.user && <Button onClick={() => signOut()}>Logout</Button>}
-      {!session.data?.user && <Button onClick={() => signIn()}>LogIn</Button>}
+      {!session.data?.user && <Button onClick={() => signIn()}>Login</Button>}
     </div>
   );
 };
