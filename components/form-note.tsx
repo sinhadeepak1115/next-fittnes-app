@@ -2,6 +2,7 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 
 const newNoteSchema = z.object({
   note: z.string().nonempty({ message: "Please enter a note" }),
@@ -18,8 +19,14 @@ const FormNote = () => {
     resolver: zodResolver(newNoteSchema),
   });
 
-  const onSubmit = (data: NewNoteType) => {
-    console.log(data);
+  const onSubmit = async (data: NewNoteType) => {
+    console.log(data.note);
+    try {
+      const response = await axios.post("/api/note", data);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

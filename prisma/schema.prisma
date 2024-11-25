@@ -46,6 +46,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   Workout       Workout[]
+  Note          Note[]
 }
 
 model VerificationToken {
@@ -70,4 +71,15 @@ model Workout {
   createdAt    DateTime @default(now())
   authorEmail  String?
   author       User?    @relation(fields: [authorEmail], references: [email])
+  Note         Note[]
+}
+
+model Note {
+  id          String   @id @default(cuid())
+  content     String
+  createdAt   DateTime @default(now())
+  workoutId   String?
+  authorEmail String?
+  author      User?    @relation(fields: [authorEmail], references: [email])
+  Workout     Workout? @relation(fields: [workoutId], references: [id])
 }

@@ -1,18 +1,21 @@
 import FormNote from "@/components/form-note";
 import Notes from "@/components/notes";
 import prisma from "@/lib/db";
-import { getCurrentUser } from "@/lib/session";
 
 export default async function ReportsPage({
   params,
 }: {
   params: { id: string };
 }) {
-  const user = await getCurrentUser();
+  const url = params.id;
+  console.log(url);
   const post = await prisma.workout.findUnique({
-    where: { user.email },
-
+    where: {
+      id: url,
+    },
   });
+  console.log(post);
+
   if (!post) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -27,7 +30,6 @@ export default async function ReportsPage({
       </div>
     );
   }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden">
